@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'accounts/style.css' %}" />
+</head>
+
+<h1>
+こんにちは
+</h1>
+
+  <body>
+    {% if user.id  %}
+    <p>ログインしました．</p>
+    <p>こんにちは，{{ user.username }}さん</p>
+    <a href="{% url 'logout' %}">ログアウト</a>
+    {% else %}
+    <a href="{% url 'login' %}">ログイン</a>
+    <a href="{% url 'create_account' %}">アカウント作成</a>
+    {% endif %}
+  </body>
+</html>

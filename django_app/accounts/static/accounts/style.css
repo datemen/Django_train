@@ -1,0 +1,47 @@
+h1{
+    color:black;
+    text-align:left;
+    font-weight:100;
+}
+.h1_change{
+    font-weight:900;
+}
+body{
+    background-color:#ddf;
+}
+
+.body_content{
+    position:relative; /* 絶対配置の基準点 */
+	width:100%; /* 600px以下は幅いっぱいに広げる */
+	max-width:600px; /* 最大幅の指定 */
+	height:300px; /* 高さの指定 */
+	margin:0 auto; /* ブロック要素の中央揃え */
+	text-align:center; /* インライン要素の中央揃え */
+	background:#fff; /* 背景色 */
+	background-color:white;
+}
+.body_content_inner{
+    position:absolute; /* 絶対配置 */
+	top:50%; /* 上から半分 */
+	left:50%; /* 左から半分 */
+	width:100%; /* 大枠と同じ幅に */
+	margin:-1.5em 0 0 -50%; /* 要素の大きさの半分引く */
+	/*border: solid #008080;*/
+}
+.login_btn {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #FFF;
+  background-image: linear-gradient(45deg, #67c5ff 0%, #ff8b5f 100%);
+  transition: .4s;
+}
+
+.login_btn:hover {
+  background-image: linear-gradient(45deg, #67c5ff 0%, #f76a35 100%);
+}
+
+
+
+

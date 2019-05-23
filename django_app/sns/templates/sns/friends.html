@@ -1,0 +1,36 @@
+{% extends 'sns/layout.html' %}
+
+{% block title %}Friends{% endblock %}
+
+{% block header %}
+<h1>Friends</h1>
+<p class="caption">※友達</p>
+<hr>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"
+        {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% for item in friends %}
+{% if item.owner == login_user %}
+         友達 : "{{item.user}}"
+        <hr>
+{% endif %}
+{% endfor %}
+{% for item in contents %}
+<p class="friends_page">
+    {% if item.username == 'public' or item.username == login_user_name %}
+    {% else %}
+     友達かも : " {{item.username}} " (<a href="{% url 'add' %}?name={{item.username}}">
+        友達追加 </a>)
+        <hr>
+    {% endif %}
+</p>
+{% endfor %}
+{% endblock %}

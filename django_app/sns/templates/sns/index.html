@@ -1,0 +1,58 @@
+{% extends 'sns/layout.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block header %}
+    <h1>PIECE</h1>
+    <p class="caption">※グループのチェックをONにして更新すると、
+    そのグループに登録されている利用者のメッセージだけが表示されます。</p>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"
+        {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'top' %}" method="post">
+{% csrf_token %}
+<input type="hidden" name="mode" value="__search_form__">
+{{search_form}}
+<button>検索</button>
+</form>
+<hr>
+<form action="{% url 'top' %}" method="post">
+{% csrf_token %}
+<input type="hidden" name="mode" value="__check_form__">
+{{check_form}}
+<button>更新</button>
+</form>
+
+
+{% for item in contents %}
+<hr>
+{% if item.group.title == 'public' %}
+[全員]
+{% endif %}
+    <p class="message_content">{{item.content}}</p>
+    {% if item.image %}
+    <img src="{{ item.image.url }}"　width="200" height="200" />
+    {% endif %}
+    <p class="message_data"> ({{item.pub_date}})</p>
+{% if item.share_id > 0 %}
+    <hr class="share_line">
+    <p class="share_item_content">{{item.get_share}}</p>
+{% endif %}
+<p class="message_owner">
+    <span class="message_counter">共有:{{item.share_count}} いいね!:{{item.good_count}}</span>
+    " 投稿者 : {{item.owner}} " (<a href="{% url 'add' %}?name={{item.owner}}">
+        友達追加 </a>)
+    <a href="{% url 'share' item.id %}" class="share_btn">共有</a>
+    <a href="{% url 'good' item.id %}" class="good_btn">いいね!</a>
+</p>
+
+{% endfor %}
+{% endblock %}

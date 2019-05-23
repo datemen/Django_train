@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'accounts/style.css' %}" />
+</head>
+
+<h1>PIECE</h1>
+  <body>
+    {% if form.errors  %}
+    <p>ユーザーID, パスワードが一致しません．</p>
+    {% endif %}
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <table>
+        {{form.as_table}}
+      </table>
+      <button type = "submit">ログイン</button>
+    </form>
+    <a href="{% url 'index' %}">ユーザー名/パスワードを忘れた場合</a>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'sns/layout.html' %}
+
+{% block title %}Photo{% endblock %}
+
+{% block header %}
+<h1>Photo</h1>
+<p class="caption">※投稿先のグループを選択し、写真を投稿します。</p>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"
+        {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% for p in photos %}
+    <div>
+        <img src="{{ p.image.url }}"　width="100" height="100" />
+        投稿者:{{ p.owner}}
+        投稿先:{{ p.group }}
+        投稿日時:{{ p.pub_date }}                                        
+    </div>
+{% endfor %}
+
+<form action="{% url 'photo' %}" method="post" enctype="multipart/form-data">      
+{% csrf_token %}
+<table>
+{{form.as_table}}
+<tr><td></td><td><button>投稿</button></td></tr>
+</table>
+</form>
+
+
+{% endblock %}

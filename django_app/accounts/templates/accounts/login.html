@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'accounts/style.css' %}" />
+</head>
+ <body>
+    <div class="body_content">
+    <h1><span class="h1_change">PIECE</span>にログイン</h1>
+    <div class="body_content_inner">
+    {% if form.errors  %}
+    <p>ユーザーID, パスワードが一致しません．</p>
+    {% endif %}
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <table>
+          <tr><th>ユーザー名</th><td>{{form.username}}</td></tr>
+          <tr><th>パスワード</th><td>{{form.password}}</td><td><button class="login_btn">ログイン</button></td></tr>
+      </table>
+    </form>
+    <a href="{% url 'index' %}" class="forgot_id">パスワードを忘れた場合はこちら</a>
+    </div>
+    </div>
+  </body>
+</html>
